@@ -63,9 +63,9 @@
             </select>
           </div>
           <div class="form-group">
-            <label>Activo</label>
+            <label>Disponible</label>
             <input type="radio" th:field="*{estado}" th:value="${true}" />
-            <label>Inactivo</label>
+            <label>No disponible</label>
             <input type="radio" th:field="*{estado}" th:value="${false}" /><br />
             <span th:errors="*{estado}" style="color: #ff0000;"></span>
           </div>
