@@ -122,7 +122,7 @@ public class Libro {
 			return "";
 		}
 		else{
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy h:mm a");
 			String shortdate = this.fechaIngreso.format(formatter);
 			return shortdate;
 		}
