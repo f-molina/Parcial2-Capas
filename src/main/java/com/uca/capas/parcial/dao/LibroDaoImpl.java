@@ -26,7 +26,17 @@ public class LibroDaoImpl implements LibroDao {
 
     @Override
     public void save(Libro libro) throws DataAccessException {
-        entityManager.persist(libro);
+        try {
+            if (libro.getCodigoLibro() == null) {
+                entityManager.persist(libro);;
+            }
+            else {
+                entityManager.merge(libro);
+                entityManager.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

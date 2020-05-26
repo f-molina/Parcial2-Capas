@@ -19,7 +19,7 @@
           <th>Autor</th>
           <th>ISBN</th>
           <th>Categoria</th>
-          <th>Fecha</th>
+          <th>Fecha de Ingreso</th>
         </thead>
         <tbody>
           <tr th:each="v : ${librosList}">
@@ -31,6 +31,7 @@
           </tr>
         </tbody>
       </table>
+      <a th:href="@{/index}" class="btn btn-primary mt-5">Regresar</a>
     </div>
     </div>
     <script src="js/jquery.min.js"></script>

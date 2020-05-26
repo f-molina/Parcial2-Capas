@@ -23,7 +23,7 @@ public class Categoria {
     private Integer codigoCategoria;
 
     @NotEmpty(message = "El campo no puede estar vacio")
-    @Size(max = 50, message = "Maximo 50 caracteres")
+    @Size(max = 50, message = "El campo sobrepasa la cantidad de 50 caracteres")
     @Column(name = "s_categoria")
     private String nombreCategoria;
 

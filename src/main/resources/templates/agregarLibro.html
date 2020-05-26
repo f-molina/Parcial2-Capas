@@ -11,7 +11,7 @@
   </head>
   <body style="font-family: 'Montserrat', sans-serif;">
     <div class="container mt-5">
-      <h1>Ingresar Contribuyente</h1>
+      <h1>Ingresar Libros</h1>
       <form
         class="mt-5"
         method="POST"
@@ -67,6 +67,7 @@
             <input type="radio" th:field="*{estado}" th:value="${true}" />
             <label>Inactivo</label>
             <input type="radio" th:field="*{estado}" th:value="${false}" /><br />
+            <span th:errors="*{estado}" style="color: #ff0000;"></span>
           </div>
         <div class="form-group">
           <input

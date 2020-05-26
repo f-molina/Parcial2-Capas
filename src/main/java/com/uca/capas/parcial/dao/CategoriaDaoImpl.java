@@ -26,7 +26,17 @@ public class CategoriaDaoImpl implements CategoriaDao {
 
     @Override
     public void save(Categoria categoria) throws DataAccessException {
-        entityManager.persist(categoria);
+        try {
+            if (categoria.getCodigoCategoria() == null) {
+                entityManager.persist(categoria);;
+            }
+            else {
+                entityManager.merge(categoria);
+                entityManager.flush();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
     
 }

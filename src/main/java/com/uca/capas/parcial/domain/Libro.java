@@ -1,11 +1,7 @@
 package com.uca.capas.parcial.domain;
 
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -29,23 +26,24 @@ public class Libro {
     private Integer codigoLibro;
 
     @NotEmpty(message = "El campo no puede estar vacio")
-    @Size(max = 500, message = "Maximo 500 caracteres")
+    @Size(max = 500, message = "El campo sobrepasa la cantidad de 500 caracteres")
     @Column(name = "s_titulo")
     private String titulo;
 
     @NotEmpty(message = "El campo no puede estar vacio")
-    @Size(max = 150, message = "Maximo 150 caracteres")
+    @Size(max = 150, message = "El campo sobrepasa la cantidad de 150 caracteres")
     @Column(name = "s_autor")
     private String autor;
 
     @Column(name = "f_ingreso")
     private LocalDateTime fechaIngreso;
 
+    @NotNull(message = "El campo no puede estar vacio")
     @Column(name = "b_estado")
     private Boolean estado;
 
     @NotEmpty(message = "El campo no puede estar vacio")
-    @Size(max = 10, message = "Maximo 10 caracteres")
+    @Size(max = 10, message = "El campo sobrepasa la cantidad de 10 caracteres")
     @Column(name = "s_isbn")
     private String isbn;
 
@@ -115,7 +113,7 @@ public class Libro {
     public String getEstadoDelegate() {
         if(this.estado == null) return "";
         else {
-            return estado == true ? "Activo":"Inactivo";
+            return estado == true ? "Disponible":"No Disponible";
         }
     }
 
@@ -124,7 +122,7 @@ public class Libro {
 			return "";
 		}
 		else{
-			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 			String shortdate = this.fechaIngreso.format(formatter);
 			return shortdate;
 		}

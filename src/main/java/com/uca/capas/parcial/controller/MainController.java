@@ -27,8 +27,12 @@ public class MainController {
     private CategoriaService categoriaService;
 
     @RequestMapping("/index")
-    public String inicio() {
-        return "index";
+    public ModelAndView inicio() {
+        ModelAndView mav = new ModelAndView();
+        mav.addObject("guardado", "");
+        mav.setViewName("index");
+
+        return mav;
     }
 
     @GetMapping("/insertarCategoria")
@@ -48,6 +52,7 @@ public class MainController {
             mav.setViewName("agregarCategoria");
         } else {
             categoriaService.save(categoria);
+            mav.addObject("guardado", "Categoria guardada con exito");
             mav.setViewName("index");
         }
 
@@ -85,6 +90,7 @@ public class MainController {
             mav.setViewName("agregarLibro");
         } else {
             libroService.save(libro);
+            mav.addObject("guardado", "Libro guardado con exito");
             mav.setViewName("index");
         }
 

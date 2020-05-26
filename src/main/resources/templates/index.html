@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
     <meta charset="ISO-8859-1" />
-    <title>Ingresar Contribuyentes</title>
+    <title>Inicio</title>
     <link href="css/bootstrap.min.css" rel="stylesheet" />
     <link
       href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
@@ -11,15 +11,17 @@
   </head>
   <body style="font-family: 'Montserrat', sans-serif;">
     <div class="container mt-5">
+      <h1 class="mb-5">Parcial 2</h1>
       <form th:action="@{/insertarCategoria}">
-        <input type="submit" value="Ingresar Categoria"><br>
-    </form>
-    <form th:action="@{/insertarLibro}">
-      <input type="submit" value="Ingresar Libro"><br>
-  </form>
-  <form th:action="@{/listado}">
-    <input type="submit" value="Ver Libros"><br>
-</form>
+        <input type="submit" value="Ingresar Categoria" /><br />
+      </form>
+      <form th:action="@{/insertarLibro}">
+        <input type="submit" class="mt-2" value="Ingresar Libro" /><br />
+      </form>
+      <form th:action="@{/listado}">
+        <input type="submit" class="mt-2" value="Ver Libros" /><br />
+      </form>
+      <span class="mt-5" th:text="${guardado}"></span>
     </div>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
