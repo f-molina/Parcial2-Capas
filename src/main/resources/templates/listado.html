@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Listado</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="font-family: 'Montserrat', sans-serif;">
+    <div class="container mt-5 text-center">
+        <h1>Listado Libros</h1>
+        <div class="card-body">
+      <table class="table-striped table-bordered" width="100%" cellspacing="0">
+        <thead>
+          <th>Titulo</th>
+          <th>Autor</th>
+          <th>ISBN</th>
+          <th>Categoria</th>
+          <th>Fecha</th>
+        </thead>
+        <tbody>
+          <tr th:each="v : ${librosList}">
+            <td th:text="${v.titulo}"></td>
+            <td th:text="${v.autor}"></td>
+            <td th:text="${v.isbn}"></td>
+            <td th:text="${v.categoria.nombreCategoria}"></td>
+            <td th:text="${v.fechaDelegate}"></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

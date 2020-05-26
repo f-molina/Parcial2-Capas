@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta charset="ISO-8859-1" />
+    <title>Ingresar Contribuyentes</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body style="font-family: 'Montserrat', sans-serif;">
+    <div class="container mt-5">
+      <h1>Ingresar Contribuyente</h1>
+      <form
+        class="mt-5"
+        method="POST"
+        th:action="@{/saveLibro}"
+        ,
+        th:object="${libro}"
+      >
+        <div class="form-group">
+          <input
+            type="hidden"
+            class="form-control"
+            th:field="*{codigoLibro}"
+            id="codigoLibro"
+          />
+        </div>
+        <div class="form-group">
+          <label for="titulo">Titulo</label>
+          <input
+            type="text"
+            class="form-control"
+            th:field="*{titulo}"
+            id="titulo"
+          />
+          <span th:errors="*{titulo}" style="color: #ff0000;"></span>
+        </div>
+        <div class="form-group">
+          <label for="autor">Autor</label>
+          <input
+            type="text"
+            class="form-control"
+            th:field="*{autor}"
+            id="autor"
+          />
+          <span th:errors="*{autor}" style="color: #ff0000;"></span>
+        </div>
+        <div class="form-group">
+          <label for="isbn">ISBN</label>
+          <input type="text" class="form-control" th:field="*{isbn}" id="isbn" />
+          <span th:errors="*{isbn}" style="color: #ff0000;"></span>
+        </div>
+        <div class="form-group">
+            <label for="categoria" style="display: block;">Categoria</label>
+            <select th:field="*{categoria.codigoCategoria}">
+              <option
+                th:each="ca : ${categorias}"
+                th:value="${ca.codigoCategoria}"
+                th:text="${ca.nombreCategoria}"
+              />
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Activo</label>
+            <input type="radio" th:field="*{estado}" th:value="${true}" />
+            <label>Inactivo</label>
+            <input type="radio" th:field="*{estado}" th:value="${false}" /><br />
+          </div>
+        <div class="form-group">
+          <input
+            type="hidden"
+            class="form-control"
+            th:field="*{fechaDelegate}"
+            id="fechaDelegate"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary mt-2">
+          Guardar
+        </button>
+      </form>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
