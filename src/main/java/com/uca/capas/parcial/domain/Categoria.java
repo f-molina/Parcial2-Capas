@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(schema = "public", name = "cat_categoria")
@@ -20,6 +22,8 @@ public class Categoria {
     @Column(name = "c_categoria")
     private Integer codigoCategoria;
 
+    @NotEmpty(message = "El campo no puede estar vacio")
+    @Size(max = 50, message = "Maximo 50 caracteres")
     @Column(name = "s_categoria")
     private String nombreCategoria;
 
@@ -43,4 +47,14 @@ public class Categoria {
     public void setNombreCategoria(String nombreCategoria) {
         this.nombreCategoria = nombreCategoria;
     }
+
+    public List<Libro> getLibros() {
+        return libros;
+    }
+
+    public void setLibros(List<Libro> libros) {
+        this.libros = libros;
+    }
+
+    
 }

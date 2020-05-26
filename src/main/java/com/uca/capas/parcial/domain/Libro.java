@@ -1,5 +1,10 @@
 package com.uca.capas.parcial.domain;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,7 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(schema = "public", name = "cat_libro")
@@ -20,18 +28,24 @@ public class Libro {
     @Column(name = "c_libro")
     private Integer codigoLibro;
 
+    @NotEmpty(message = "El campo no puede estar vacio")
+    @Size(max = 500, message = "Maximo 500 caracteres")
     @Column(name = "s_titulo")
     private String titulo;
 
+    @NotEmpty(message = "El campo no puede estar vacio")
+    @Size(max = 150, message = "Maximo 150 caracteres")
     @Column(name = "s_autor")
     private String autor;
 
     @Column(name = "f_ingreso")
-    private Date fechaIngreso;
+    private LocalDateTime fechaIngreso;
 
     @Column(name = "b_estado")
     private Boolean estado;
 
+    @NotEmpty(message = "El campo no puede estar vacio")
+    @Size(max = 10, message = "Maximo 10 caracteres")
     @Column(name = "s_isbn")
     private String isbn;
 
@@ -65,11 +79,11 @@ public class Libro {
         this.autor = autor;
     }
 
-    public Date getFechaIngreso() {
+    public LocalDateTime getFechaIngreso() {
         return fechaIngreso;
     }
 
-    public void setFechaIngreso(Date fechaIngreso) {
+    public void setFechaIngreso(LocalDateTime fechaIngreso) {
         this.fechaIngreso = fechaIngreso;
     }
 
@@ -79,5 +93,46 @@ public class Libro {
 
     public void setEstado(Boolean estado) {
         this.estado = estado;
+    }
+
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    //delegates
+    public String getEstadoDelegate() {
+        if(this.estado == null) return "";
+        else {
+            return estado == true ? "Activo":"Inactivo";
+        }
+    }
+
+    public String getFechaDelegate(){
+		if(this.fechaIngreso == null){
+			return "";
+		}
+		else{
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+			String shortdate = this.fechaIngreso.format(formatter);
+			return shortdate;
+		}
+    }
+    
+    //current date before insert
+    @PrePersist
+    public void prePersist(){
+        this.fechaIngreso = LocalDateTime.now();
     }
 }
